@@ -22,7 +22,7 @@ where
     let response = reqwest::get(url).await;
     if let Ok(data) = response {
         if let Ok(sw_data) = data.json::<T>().await {
-            Ok(sw_data)
+            Ok(repo)
         } else {
             Err(Error::DeserializeError)
         }
@@ -38,18 +38,29 @@ async fn fetch_sw(sw_data: String) -> Result<SwApi, Error> {
 
 #[function_component(SwFetch)]
 fn sw_fetch() -> Html {
-    let state = use_async(async move { fetch_sw("people/1/".to_string()).await });
+    let state = use_state(|| "people/1/".to_string());
 
+    /*
     let onclick = {
         let state = state.clone();
         Callback::from(move |_| {
             state.run();
         })
     };
+    */
+
+    let _ = {
+        let data = state.clone();
+        use_async_with_options(
+            async move { fetch_sw((*state).clone()).await },
+            // This will load data automatically when mount.
+            UseAsyncOptions::enable_auto(),
+        )
+    };
 
     html! {
         <div>
-            <button {onclick} disabled={state.loading}>{ "Load Star Wars Information: " }</button>
+            // <button {onclick} disabled={state.loading}>{ "Load Star Wars Information: " }</button>
             <p>
                 {
                     if state.loading {

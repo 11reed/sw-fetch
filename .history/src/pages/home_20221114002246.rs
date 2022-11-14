@@ -47,6 +47,11 @@ fn sw_fetch() -> Html {
         })
     };
 
+    /*
+    
+    
+    */
+
     html! {
         <div>
             <button {onclick} disabled={state.loading}>{ "Load Star Wars Information: " }</button>

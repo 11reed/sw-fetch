@@ -21,8 +21,8 @@ where
 {
     let response = reqwest::get(url).await;
     if let Ok(data) = response {
-        if let Ok(sw_data) = data.json::<T>().await {
-            Ok(sw_data)
+        if let Ok(repo) = data.json::<T>().await {
+            Ok(repo)
         } else {
             Err(Error::DeserializeError)
         }

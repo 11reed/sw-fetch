@@ -40,6 +40,7 @@ async fn fetch_sw(sw_data: String) -> Result<SwApi, Error> {
 fn sw_fetch() -> Html {
     let state = use_async(async move { fetch_sw("people/1/".to_string()).await });
 
+    /*
     let onclick = {
         let state = state.clone();
         Callback::from(move |_| {
@@ -49,10 +50,10 @@ fn sw_fetch() -> Html {
 
     html! {
         <div>
-            <button {onclick} disabled={state.loading}>{ "Load Star Wars Information: " }</button>
+            // <button {onclick} disabled={state.loading}>{ "Load Star Wars Information: " }</button>
             <p>
                 {
-                    if state.loading {
+                    if state {
                         html! { "Loading..." }
                     } else {
                         html! {}

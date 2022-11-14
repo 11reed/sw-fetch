@@ -49,10 +49,10 @@ fn sw_fetch() -> Html {
 
     html! {
         <div>
-            <button {onclick} disabled={state.loading}>{ "Load Star Wars Information: " }</button>
+            // <button {onclick} disabled={state.loading}>{ "Load Star Wars Information: " }</button>
             <p>
                 {
-                    if state.loading {
+                    if state.data {
                         html! { "Loading..." }
                     } else {
                         html! {}

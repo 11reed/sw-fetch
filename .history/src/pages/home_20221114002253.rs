@@ -47,6 +47,18 @@ fn sw_fetch() -> Html {
         })
     };
 
+    /*
+    let _ = {
+        let repo = repo.clone();
+        use_async_with_options(
+            async move { fetch_repo((*repo).clone()).await },
+            // This will load data automatically when mount.
+            UseAsyncOptions::enable_auto(),
+        )
+    };
+    
+    */
+
     html! {
         <div>
             <button {onclick} disabled={state.loading}>{ "Load Star Wars Information: " }</button>
